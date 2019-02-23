@@ -4,8 +4,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './header';
 import StreamList from './stream/StreamList';
 import StreamCreate from './stream/StreamCreate';
-import StreamShow from './stream/StreamShow';
-import StreamEdit from './stream/StreamEdit';
+import StreamRead from './stream/StreamRead';
+import StreamUpdate from './stream/StreamUpdate';
 import StreamDelete from './stream/StreamDelete';
 
 const App = () => {
@@ -16,8 +16,8 @@ const App = () => {
           <Header />
           <Route path="/" exact component={StreamList} />
           <Route path="/stream/new" component={StreamCreate} />
-          <Route path="/stream/show" component={StreamShow} />
-          <Route path="/stream/edit" component={StreamEdit} />
+          <Route path="/stream/view" component={StreamRead} />
+          <Route path="/stream/edit" component={StreamUpdate} />
           <Route path="/stream/delete" component={StreamDelete} />
         </div>
       </BrowserRouter>

@@ -1,9 +1,9 @@
 import React from 'react';
 
-const StreamEdit = () => (
+const StreamUpdate = () => (
   <div>
     <h1>Edit stream.</h1>
   </div>
 )
 
-export default StreamEdit;
+export default StreamUpdate;
