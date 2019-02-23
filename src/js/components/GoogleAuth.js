@@ -9,7 +9,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateAuthStatus: (isSignedIn, currentUser) => dispatch(updateAuthStatus(isSignedIn, currentUser))
+  updateAuthStatus: (isSignedIn, currentUser, currentUserId) => dispatch(updateAuthStatus(isSignedIn, currentUser, currentUserId))
 });
 
 class GoogleAuth extends Component {
@@ -27,7 +27,10 @@ class GoogleAuth extends Component {
   }
 
   updateAuthStatus = () => {
-    this.props.updateAuthStatus(this.auth.isSignedIn.get(), this.auth.currentUser.get());
+    const isSignedIn = this.auth.isSignedIn.get();
+    const currentUser = isSignedIn ? this.auth.currentUser.get() : false;
+    const currentUserId = isSignedIn ? this.auth.currentUser.get().getId() : false;
+    this.props.updateAuthStatus(isSignedIn, currentUser, currentUserId);
   }
 
   toggleAuth = () => {

@@ -2,7 +2,8 @@ import { UPDATE_AUTH_STATUS } from './action-types';
 
 const initialState = {
   isSignedIn: false,
-  currentUser: false
+  currentUser: false,
+  currentUserId: false
 }
 
 const authStatus = (state = initialState, action) => {
@@ -10,7 +11,8 @@ const authStatus = (state = initialState, action) => {
     case UPDATE_AUTH_STATUS:
       return {
         isSignedIn: action.isSignedIn,
-        currentUser: action.currentUser
+        currentUser: action.currentUser,
+        currentUserId: action.currentUserId
       }
   }
   return state;
