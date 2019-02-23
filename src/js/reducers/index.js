@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
 /* Reducers */
-import cepData from './cepData';
+import authStatus from './authStatus';
 
 export const combinedReducers = combineReducers({
-  cepData
+  authStatus
 });
 
 export default combinedReducers;

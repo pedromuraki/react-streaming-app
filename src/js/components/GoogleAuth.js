@@ -1,43 +1,41 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const clientId = '219659721651-vd0u3l40av2d1igpj4oarspglslii6lq.apps.googleusercontent.com';
+import { updateAuthStatus } from '../reducers/authStatus/action-creators';
+
+const mapStateToProps = (state) => ({
+  isSignedIn: state.authStatus.isSignedIn,
+  currentUser: state.authStatus.currentUser
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  updateAuthStatus: (isSignedIn, currentUser) => dispatch(updateAuthStatus(isSignedIn, currentUser))
+});
 
 class GoogleAuth extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-      isSignedIn: false,
-      currentUser: false
-    }
-  }
-
   componentDidMount() {
     gapi.load('client:auth2', () => {
       gapi.client.init({
-        clientId,
+        clientId: '219659721651-vd0u3l40av2d1igpj4oarspglslii6lq.apps.googleusercontent.com',
         scope: 'email'
       }).then(() => {
         this.auth = gapi.auth2.getAuthInstance();
-        this.updatedSignInStatus();
-        this.auth.isSignedIn.listen(this.updatedSignInStatus);
+        this.updateAuthStatus();
+        this.auth.isSignedIn.listen(this.updateAuthStatus);
       });
     });
   }
 
-  updatedSignInStatus = () => {
-    this.setState({
-      isSignedIn: this.auth.isSignedIn.get(),
-      currentUser: this.auth.currentUser.get()
-    });
+  updateAuthStatus = () => {
+    this.props.updateAuthStatus(this.auth.isSignedIn.get(), this.auth.currentUser.get());
   }
 
   toggleAuth = () => {
-    this.state.isSignedIn ? this.auth.signOut() : this.auth.signIn();
+    this.props.isSignedIn ? this.auth.signOut() : this.auth.signIn();
   }
 
   renderLoginBtn = () => {
-    const { isSignedIn, currentUser } = this.state;
+    const { isSignedIn, currentUser } = this.props;
     return isSignedIn ? `Logout (${currentUser.getBasicProfile().getName()})` : 'Login';
   }
 
@@ -48,4 +46,4 @@ class GoogleAuth extends Component {
   }
 }
 
-export default GoogleAuth;
+export default connect(mapStateToProps, mapDispatchToProps)(GoogleAuth);
