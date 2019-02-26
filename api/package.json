@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "json-server -p 3001 --watch db.json"
   },
   "author": "Pedro Muraki <pedromuraki@gmail.com> (https://github.com/pedromuraki)",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.14.2"
+  }
 }

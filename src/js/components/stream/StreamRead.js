@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const StreamRead = () => (
-  <div>
-    <h1>Streaming name</h1>
-    <p>Streaming description.</p>
-  </div>
-)
+import { getStream } from '../../reducers/streams/action-creators';
 
-export default StreamRead;
+const mapStateToProps = state => ({
+  streams: state.streams
+});
+
+class StreamRead extends Component {
+  componentDidMount() {
+    this.props.getStream(3);
+  }
+
+  render() {
+    const { streams } = this.props;
+
+    return (
+      <div>
+        <h1>{streams.title}</h1>
+        <p>{streams.description}</p>
+      </div>
+    )
+  }
+}
+
+export default connect(mapStateToProps, { getStream })(StreamRead);
