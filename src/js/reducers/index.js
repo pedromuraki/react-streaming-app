@@ -6,7 +6,7 @@ import { reducer as formReducer } from 'redux-form';
 
 export const combinedReducers = combineReducers({
   authStatus,
-  formReducer
+  form: formReducer
 });
 
 export default combinedReducers;
