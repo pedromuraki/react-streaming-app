@@ -4,6 +4,10 @@ import { Field, reduxForm } from 'redux-form';
 
 import { createStream } from '../../reducers/streams/action-creators';
 
+const mapStateToProps = state => ({
+  currentUserId: state.authStatus.currentUserId
+});
+
 const validate = values => {
   const errors = {}
   if (!values.title) {
@@ -17,7 +21,7 @@ const validate = values => {
 
 class FormCreate extends Component {
   handleFormSubmit = values => {
-    this.props.createStream(values);
+    this.props.createStream(values, this.props.currentUserId);
   }
 
   renderField = props => {
@@ -45,7 +49,7 @@ class FormCreate extends Component {
   }
 }
 
-export default connect(null, { createStream })(reduxForm({
+export default connect(mapStateToProps, { createStream })(reduxForm({
   form: 'formCreate',
   validate
 })(FormCreate));

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { CREATE_STREAM, GET_STREAMS, GET_STREAM } from './action-types';
 
-export const createStream = (values) => dispatch => {
+export const createStream = (values, currentUserId) => dispatch => {
   axios
-    .post('http://localhost:3001/streams', values)
+    .post('http://localhost:3001/streams', { ...values, userId: currentUserId })
     .then((res) => dispatch({
       type: CREATE_STREAM,
       data: res.data

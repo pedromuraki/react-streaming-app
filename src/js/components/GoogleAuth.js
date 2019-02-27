@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { updateAuthStatus } from '../reducers/authStatus/action-creators';
 
@@ -44,7 +45,10 @@ class GoogleAuth extends Component {
 
   render() {
     return (
-      <button onClick={this.toggleAuth}>{this.renderLoginBtn()}</button>
+      <div>
+        <button onClick={this.toggleAuth}>{this.renderLoginBtn()}</button>
+        {this.props.isSignedIn ? (<Link to="/stream/new" className="button">New Stream</Link>) : null}
+      </div>
     )
   }
 }
