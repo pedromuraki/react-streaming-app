@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 
 class StreamRead extends Component {
   componentDidMount() {
-    this.props.getStream(3);
+    this.props.getStream(this.props.match.params.id);
   }
 
   render() {

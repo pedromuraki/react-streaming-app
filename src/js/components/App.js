@@ -17,9 +17,9 @@ const App = () => {
           <Header />
           <Route path="/" exact component={StreamList} />
           <Route path="/stream/new" component={StreamCreate} />
-          <Route path="/stream/view" component={StreamRead} />
-          <Route path="/stream/edit" component={StreamUpdate} />
-          <Route path="/stream/delete" component={StreamDelete} />
+          <Route path="/stream/view/:id" component={StreamRead} />
+          <Route path="/stream/edit/:id" component={StreamUpdate} />
+          <Route path="/stream/delete/:id" component={StreamDelete} />
         </div>
       </Router>
     </div>

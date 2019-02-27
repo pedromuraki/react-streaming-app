@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import uuidv from 'uuid';
 
 import { getStreams } from '../../reducers/streams/action-creators';
 
@@ -18,13 +20,16 @@ class StreamList extends Component {
 
     return streams.length !== 0
       ? streams.map(stream => (
-        <li key={stream.id} id={stream.id}>
+        <li key={uuidv()}>
           <h2>{stream.title}</h2>
           <p>{stream.description}</p>
+          <div>
+            <Link to={`stream/view/${stream.id}`} className="button">Watch</Link>
+          </div>
           {stream.userId === this.props.currentUserId ? (
             <div>
-              <button>Edit</button>
-              <button>Delete</button>
+              <Link to={`stream/edit/${stream.id}`} className="button">Edit</Link>
+              <Link to={`stream/delete/${stream.id}`} className="button">Delete</Link>
             </div>
           ) : null}
         </li>
