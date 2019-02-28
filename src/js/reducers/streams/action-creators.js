@@ -1,6 +1,6 @@
 import history from '../../history';
 import axios from 'axios';
-import { CREATE_STREAM, GET_STREAMS, GET_STREAM } from './action-types';
+import { CREATE_STREAM, GET_STREAMS, GET_STREAM, EDIT_STREAM, CLEAR_STREAM } from './action-types';
 
 export const createStream = (values, currentUserId) => dispatch => {
   axios
@@ -8,6 +8,18 @@ export const createStream = (values, currentUserId) => dispatch => {
     .then(res => {
       dispatch({
         type: CREATE_STREAM,
+        data: res.data
+      });
+      history.push('/');
+    });
+}
+
+export const editStream = (id, values, currentUserId) => dispatch => {
+  axios
+    .put(`http://localhost:3001/streams/${id}`, { ...values, userId: currentUserId })
+    .then(res => {
+      dispatch({
+        type: EDIT_STREAM,
         data: res.data
       });
       history.push('/');
@@ -31,3 +43,7 @@ export const getStream = (id) => dispatch => {
       data: res.data
     }));
 }
+
+export const clearStream = () => ({
+  type: CLEAR_STREAM
+})

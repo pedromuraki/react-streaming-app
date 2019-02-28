@@ -1,16 +1,28 @@
 {
   "streams": [
     {
-      "title": "dsadsa",
-      "description": "adsdsadsasad",
+      "title": "My stream",
+      "description": "this is my stream",
       "userId": "106950956891183218798",
       "id": 1
     },
     {
-      "title": "dsdsdfsdfsdfs",
-      "description": "dfsdfsdfsfdsdfsdfs",
+      "description": "this is another stream",
+      "title": "Another stream",
       "userId": "106950956891183218798",
       "id": 2
+    },
+    {
+      "title": "One more stream",
+      "description": "this is a stream",
+      "userId": "106950956891183218798",
+      "id": 3
+    },
+    {
+      "title": "Fourth stream edited",
+      "description": "the fourth stream",
+      "userId": "106950956891183218798",
+      "id": 4
     }
   ]
 }

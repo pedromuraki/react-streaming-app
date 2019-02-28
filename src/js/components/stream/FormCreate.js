@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import { createStream } from '../../reducers/streams/action-creators';
+import { getStream, createStream, editStream, clearStream } from '../../reducers/streams/action-creators';
 
-const mapStateToProps = state => ({
-  currentUserId: state.authStatus.currentUserId
-});
+const mapStateToProps = state => {
+  return {
+    currentUserId: state.authStatus.currentUserId,
+    initialValues: state.streams
+  }
+};
 
 const validate = values => {
   const errors = {}
@@ -20,8 +23,16 @@ const validate = values => {
 }
 
 class FormCreate extends Component {
+  componentDidMount() {
+    this.props.edit
+      ? this.props.getStream(this.props.streamId)
+      : this.props.clearStream();
+  }
+
   handleFormSubmit = values => {
-    this.props.createStream(values, this.props.currentUserId);
+    this.props.edit
+      ? this.props.editStream(this.props.streamId, values, this.props.currentUserId)
+      : this.props.createStream(values, this.props.currentUserId)
   }
 
   renderField = props => {
@@ -49,7 +60,8 @@ class FormCreate extends Component {
   }
 }
 
-export default connect(mapStateToProps, { createStream })(reduxForm({
+export default connect(mapStateToProps, { getStream, createStream, editStream, clearStream })(reduxForm({
   form: 'formCreate',
-  validate
+  validate,
+  enableReinitialize: true
 })(FormCreate));
