@@ -18,8 +18,8 @@ const streams = (state = initialState, action) => {
     // case EDIT_STREAM:
     //   return data;
 
-    case CLEAR_STREAM:
-      return {};
+    // case CLEAR_STREAM:
+    //   return {};
   }
 
   return state;

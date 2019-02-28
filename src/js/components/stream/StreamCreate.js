@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import FormCreate from './FormCreate';
+import StreamForm from './StreamForm';
 
-const StreamCreate = () => (
-  <div>
-    <h1>Create new stream.</h1>
-    <FormCreate edit={false} />
-  </div>
-);
+import { createStream } from '../../reducers/streams/action-creators';
 
-export default StreamCreate;
+const mapStateToProps = state => {
+  return {
+    currentUserId: state.authStatus.currentUserId
+  }
+};
+
+class StreamCreate extends Component {
+  handleFormSubmit = (values) => {
+    this.props.createStream(values, this.props.currentUserId)
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Create stream.</h1>
+        <StreamForm handleFormSubmit={this.handleFormSubmit} />
+      </div>
+    )
+  }
+}
+
+export default connect(mapStateToProps, { createStream })(StreamCreate);

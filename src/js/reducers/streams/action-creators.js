@@ -44,6 +44,6 @@ export const getStream = (id) => dispatch => {
     }));
 }
 
-export const clearStream = () => ({
-  type: CLEAR_STREAM
-})
+// export const clearStream = () => ({
+//   type: CLEAR_STREAM
+// })
