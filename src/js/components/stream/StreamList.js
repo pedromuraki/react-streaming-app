@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import uuidv from 'uuid';
 
 import { getStreams } from '../../reducers/streams/action-creators';
+import { showModal } from '../../reducers/modalStatus/action-creators';
 
 const mapStateToProps = state => ({
   streams: state.streams,
@@ -29,7 +30,7 @@ class StreamList extends Component {
           {stream.userId === this.props.currentUserId ? (
             <div>
               <Link to={`stream/edit/${stream.id}`} className="button">Edit</Link>
-              <Link to={`stream/delete/${stream.id}`} className="button">Delete</Link>
+              <button onClick={() => this.props.showModal(stream.id)}>Delete</button>
             </div>
           ) : null}
         </li>
@@ -51,4 +52,4 @@ class StreamList extends Component {
   }
 }
 
-export default connect(mapStateToProps, { getStreams })(StreamList);
+export default connect(mapStateToProps, { getStreams, showModal })(StreamList);

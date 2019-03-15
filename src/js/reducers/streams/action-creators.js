@@ -1,6 +1,6 @@
 import history from '../../history';
 import axios from 'axios';
-import { CREATE_STREAM, GET_STREAMS, GET_STREAM, EDIT_STREAM, CLEAR_STREAM } from './action-types';
+import { CREATE_STREAM, GET_STREAMS, GET_STREAM, EDIT_STREAM } from './action-types';
 
 export const createStream = (values, currentUserId) => dispatch => {
   axios
@@ -43,7 +43,3 @@ export const getStream = (id) => dispatch => {
       data: res.data
     }));
 }
-
-// export const clearStream = () => ({
-//   type: CLEAR_STREAM
-// })

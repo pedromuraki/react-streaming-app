@@ -1,4 +1,4 @@
-import { CREATE_STREAM, GET_STREAMS, GET_STREAM, EDIT_STREAM, CLEAR_STREAM } from "./action-types";
+import { CREATE_STREAM, GET_STREAMS, GET_STREAM, EDIT_STREAM, DELETE_STREAM } from "./action-types";
 
 const initialState = {}
 
@@ -18,8 +18,8 @@ const streams = (state = initialState, action) => {
     // case EDIT_STREAM:
     //   return data;
 
-    // case CLEAR_STREAM:
-    //   return {};
+    // case DELETE_STREAM:
+    //   return data;
   }
 
   return state;
