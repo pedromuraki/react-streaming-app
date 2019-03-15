@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import history from '../../history';
 
 import StreamForm from './StreamForm';
 
-import { getStream, editStream } from '../../reducers/streams/action-creators';
+import { getStream } from '../../reducers/streams/action-creators';
 
+import axios from 'axios';
 import _ from 'lodash';
 
 const mapStateToProps = state => {
@@ -19,7 +21,9 @@ class StreamUpdate extends Component {
   }
 
   handleFormSubmit = (values) => {
-    this.props.editStream(this.props.match.params.id, values)
+    axios
+      .patch(`http://localhost:3001/streams/${this.props.match.params.id}`, values)
+      .then(() => history.push('/'));
   }
 
   render() {
@@ -32,4 +36,4 @@ class StreamUpdate extends Component {
   }
 }
 
-export default connect(mapStateToProps, { getStream, editStream })(StreamUpdate);
+export default connect(mapStateToProps, { getStream })(StreamUpdate);

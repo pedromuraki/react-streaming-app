@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import history from '../../history';
+
+import axios from 'axios';
 
 import StreamForm from './StreamForm';
-
-import { createStream } from '../../reducers/streams/action-creators';
 
 const mapStateToProps = state => {
   return {
@@ -13,7 +14,9 @@ const mapStateToProps = state => {
 
 class StreamCreate extends Component {
   handleFormSubmit = (values) => {
-    this.props.createStream(values, this.props.currentUserId)
+    axios
+      .post('http://localhost:3001/streams', { ...values, userId: this.props.currentUserId })
+      .then(() => history.push('/'));
   }
 
   render() {
@@ -26,4 +29,4 @@ class StreamCreate extends Component {
   }
 }
 
-export default connect(mapStateToProps, { createStream })(StreamCreate);
+export default connect(mapStateToProps)(StreamCreate);
