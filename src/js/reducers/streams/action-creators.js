@@ -14,9 +14,9 @@ export const createStream = (values, currentUserId) => dispatch => {
     });
 }
 
-export const editStream = (id, values, currentUserId) => dispatch => {
+export const editStream = (id, values) => dispatch => {
   axios
-    .put(`http://localhost:3001/streams/${id}`, { ...values, userId: currentUserId })
+    .patch(`http://localhost:3001/streams/${id}`, values)
     .then(res => {
       dispatch({
         type: EDIT_STREAM,

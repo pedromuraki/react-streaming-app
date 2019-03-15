@@ -5,9 +5,10 @@ import StreamForm from './StreamForm';
 
 import { getStream, editStream } from '../../reducers/streams/action-creators';
 
+import _ from 'lodash';
+
 const mapStateToProps = state => {
   return {
-    currentUserId: state.authStatus.currentUserId,
     stream: state.streams
   }
 };
@@ -18,14 +19,14 @@ class StreamUpdate extends Component {
   }
 
   handleFormSubmit = (values) => {
-    this.props.editStream(this.props.match.params.id, values, this.props.currentUserId)
+    this.props.editStream(this.props.match.params.id, values)
   }
 
   render() {
     return (
       <div>
         <h1>Edit stream.</h1>
-        <StreamForm initialValues={this.props.stream} handleFormSubmit={this.handleFormSubmit} />
+        <StreamForm initialValues={_.pick(this.props.stream, 'title', 'description')} handleFormSubmit={this.handleFormSubmit} />
       </div>
     )
   }
